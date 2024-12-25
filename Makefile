@@ -2,13 +2,16 @@ NAME = libftprintf.a
 
 LIBFT_SRC = libft/ft_strdup.c\
 			libft/ft_strlen.c\
+			libft/ft_isascii.c\
 
 FT_PRINTF_SRC = ft_printf.c\
 			ft_format_recognizer.c\
 			ft_counter.c\
 			ft_putchar_count.c\
 			ft_putstr_count.c\
-			ft_print_pointer.c
+			ft_print_pointer.c\
+			ft_printnbr_count.c\
+			ft_print_hexa.c\
 
 SRC = $(LIBFT_SRC) $(FT_PRINTF_SRC)
 

@@ -2,6 +2,7 @@
 # define FT_PRINTF_H
 # include "libft/libft.h"
 # include <stdarg.h>
+# include <stdio.h>
 # include <stdint.h>
 # define CHAR 1
 # define STRING 2
@@ -19,5 +20,7 @@ void	ft_putstr_count(char *str, int *count);
 int		format_recognizer(char c);
 int		percentage_counter(const char *str);
 void	ft_print_pointer(uintptr_t nb, int *count);
-
+void	ft_printnb_count(long long nb, int *count);
+void	ft_print_hexa(unsigned int nb, int *count, char c);
+int ft_isascii(int i);
 #endif

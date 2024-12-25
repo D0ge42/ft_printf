@@ -15,7 +15,7 @@
 
 void	*calloc(size_t nmemb, size_t size)
 {
-	void	*array;
+	void *array;
 
 	if (nmemb && size && (nmemb * size >= 4294967295U))
 		return (0);

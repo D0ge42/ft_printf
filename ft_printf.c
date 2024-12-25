@@ -8,6 +8,7 @@ int	ft_printf(const char *mandatory, ...)
 	int		count;
 	va_list	args;
 	int		i;
+	void	*ptr;
 	char	*str;
 
 	count = 0;
@@ -18,9 +19,10 @@ int	ft_printf(const char *mandatory, ...)
 		if (mandatory[i] == '%')
 		{
 			i += 2;
-			if (format_recognizer(mandatory[i - 1]) == CHAR)
+			char c = mandatory[i - 1];
+			if (format_recognizer(c) == CHAR)
 				ft_putchar_count(va_arg(args, int), &count);
-			if (format_recognizer(mandatory[i - 1]) == STRING)
+			if (format_recognizer(c) == STRING)
 			{
 				str = va_arg(args, char *);
 				if (!str)
@@ -28,23 +30,38 @@ int	ft_printf(const char *mandatory, ...)
 				else
 					ft_putstr_count(str, &count);
 			}
-			if (format_recognizer(mandatory[i - 1]) == POINTER)
+			if (format_recognizer(c) == POINTER)
 			{
-				
-				ft_putchar_count('0', &count);
-				ft_putchar_count('x', &count);
-				ft_print_pointer(va_arg(args, uintptr_t), &count);
+				ptr = va_arg(args, void *);
+				if (!ptr)
+					ft_putstr_count("(nil)", &count);
+				else
+				{
+					ft_putchar_count('0', &count);
+					ft_putchar_count('x', &count);
+					ft_print_pointer((uintptr_t)ptr, &count);
+				}
 			}
+			if (format_recognizer(c) == DECIMAL
+				|| format_recognizer(c) == INTEGER)
+				ft_printnb_count(va_arg(args, int), &count);
+			if (format_recognizer(c) == UNSIGNED)
+				ft_printnb_count(va_arg(args, unsigned), &count);
+			if (format_recognizer(c) == HEXADECIMAL_LC)
+				ft_print_hexa(va_arg(args, unsigned int), &count, 'x');
+			if (format_recognizer(c) == HEXADECIMAL_UP)
+				ft_print_hexa(va_arg(args, unsigned int), &count, 'X');
+			if (format_recognizer(c) == PERC)
+					ft_putchar_count('%', &count);
 		}
-		if (mandatory[i])
+		else
 			ft_putchar_count(mandatory[i++], &count);
 	}
 	va_end(args);
-	return (count); // Lenght of string without formats specifiers.
+	return (count);
 }
 
-int main()
+int	main(void)
 {
-	printf("%i\n",ft_printf(" %p %p ", 0, 0));
-	printf("%i\n",printf(" %p %p ", NULL, NULL));
+	ft_printf("%i\n",2147483649);
 }
