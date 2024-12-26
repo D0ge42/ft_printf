@@ -1,28 +1,22 @@
 NAME = libftprintf.a
 
-LIBFT_SRC = libft/ft_strdup.c\
-			libft/ft_strlen.c\
-			libft/ft_isascii.c\
-
 FT_PRINTF_SRC = ft_printf.c\
 			ft_format_recognizer.c\
-			ft_counter.c\
 			ft_putchar_count.c\
 			ft_putstr_count.c\
 			ft_print_pointer.c\
 			ft_printnbr_count.c\
 			ft_print_hexa.c\
+			ft_putstr.c\
 
-SRC = $(LIBFT_SRC) $(FT_PRINTF_SRC)
+SRC = $(FT_PRINTF_SRC)
 
 OBJS = $(SRC:.c=.o)
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 AR = ar crs
-
-LIBFT_PATH = /home/doge/ft_printf42/libft/
 
 $(NAME): $(OBJS)
 	$(AR) $@ $^
@@ -35,11 +29,11 @@ all: $(NAME)
 
 clean:
 	$(RM) $(OBJS)
-	$(RM) $(LIBFT_PATH)/libft.a
+	$(RM)
 
 fclean: clean
 	$(RM) $(NAME)
-	$(RM) $(LIBFT_PATH)/libft.a
+	$(RM)
 
 re: fclean all
 
