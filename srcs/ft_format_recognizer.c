@@ -1,6 +1,6 @@
 #include "../includes/ft_printf.h"
 
-int	format_recognizer(char c, va_list args, int *count)
+void	format_recognizer(char c, va_list args, int *count)
 {
 	if (c == CHAR)
 		ft_putchar_count(va_arg(args, int), count);
@@ -18,5 +18,4 @@ int	format_recognizer(char c, va_list args, int *count)
 		ft_print_hexa(va_arg(args, unsigned int), count, 'X');
 	else if (c == PERC)
 		ft_putchar_count('%', count);
-	return (0);
 }
